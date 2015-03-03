@@ -1,9 +1,6 @@
 var fs = require('fs');
-var path = require('path');
 var spawn = require('child_process').spawn;
 var usleep = require('sleep').usleep;
-fs.exists = fs.exists || path.exists;
-fs.existsSync = fs.existsSync || path.existsSync;
 
 
 function Xvfb(options) {
@@ -117,7 +114,7 @@ Xvfb.prototype = {
       do {
         displayNum++;
         lockFile = this._lockFile(displayNum);
-      } while (!this._reuse && path.existsSync(lockFile));
+      } while (!this._reuse && fs.existsSync(lockFile));
       this._display = ':' + displayNum;
     }
     return this._display;
